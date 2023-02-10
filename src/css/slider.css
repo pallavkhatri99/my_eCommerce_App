@@ -1,0 +1,17 @@
+.silder{
+    margin: 20px 20px 0px 20px;
+}
+.slider-previous{
+    position: relative;
+    top: -150px;
+    left: 20px;
+    cursor: pointer;  
+    text-align: left;
+}
+.slider-next{
+    position: relative;
+    text-align: right;
+    top : -200px;
+    right: 20px;
+    cursor: pointer;
+}

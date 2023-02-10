@@ -1,0 +1,32 @@
+#category{
+    padding: 70px 40px 0px 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-align: center;
+    cursor: pointer;
+}
+.cat-item img{
+    width: 75%;
+}
+/*.cat-item img:hover{
+    width: 85%;
+    -webkit-transition: all .10s ease-in-out;
+    
+}*/
+.list-main{
+    display: block;
+    position: relative;
+    top: 14px;
+}
+.list{
+    text-align: left;
+    
+}
+.list-item{
+    padding: 2px 0px 2px 0px;
+}
+.list-item:hover{
+    font-weight: bold;
+    background-color: lightgray;
+}

@@ -1,0 +1,37 @@
+{
+   "trending":{ "heading":"Top on Tranding",
+    "array":[
+    {"img":"https://n1.sdlcdn.com/imgs/i/n/r/large/bhawna-collection-Loard-Shiv-Trishul-SDL890408077-1-86933.jpeg","product":"Bhawna Collection Loard Shiv Trishul Damru Locket","rating":"4","orignalPrice":200,"disprice":100},
+    {"img":"https://n4.sdlcdn.com/imgs/k/e/u/large/Veirdo-100-Cotton-Regular-Fit-SDL302182620-1-f0fac.jpg","product":"Veirdo - Green Cotton Regular Fit Men's T-Shirt ( Pack of 1 )","rating":"4","orignalPrice":600,"disprice":250},
+    {"img":"https://n1.sdlcdn.com/imgs/i/z/e/large/Bentag-Vegetable-Fruit-Clever-Cutter-SDL841893040-1-ea5e3.jpg","product":"Bentag kitchenware Vegetable & Fruit Clever Cutter Stainless Steel Vegetable Scissor ","rating":"4","orignalPrice":415,"disprice":135},
+    {"img":"https://n2.sdlcdn.com/imgs/h/9/p/large/ASIAN-Brown-Daily-Slippers-SDL287171338-4-f3709.jpg","product":"ASIAN Brown Flip Flops Flip Flops","rating":"4","orignalPrice":450,"disprice":399},
+    {"img":"https://n1.sdlcdn.com/imgs/i/3/9/large/DARK-ROMANCE-Faux-Leather-Beige-SDL899800683-1-500e3.jpeg","product":"DARK ROMANCE - Beige Faux Leather Men's Zip Around Wallet ( Pack of 1 )","rating":"4","orignalPrice":999,"disprice":250},
+    {"img":"https://n4.sdlcdn.com/imgs/h/j/e/large/Battlestar-Tummy-Trimmer-Double-String-SDL774194847-1-45168.jpeg","product":"Battlestar Tummy Trimmer Double String Abdominal Exercise- Black","rating":"4","orignalPrice":"1,199","disprice":267},
+    {"img":"https://n1.sdlcdn.com/imgs/i/n/r/large/bhawna-collection-Loard-Shiv-Trishul-SDL890408077-1-86933.jpeg","product":"Bhawna Collection Loard Shiv Trishul Damru Locket","rating":"4","orignalPrice":200,"disprice":100}
+    ]
+   },
+
+   "shoes":{"heading":"FEATURED CASUAL SHOES",
+   "array":[{"img":"https://n4.sdlcdn.com/imgs/j/s/0/large/Leeport-Lifestyle-Blue-Casual-Shoes-SDL281357670-1-5f352.jpeg","product":"SS Lifestyle Brown Casual Shoes","rating":"4","orignalPrice":"1,200","disprice":800},
+    {"img":"https://n1.sdlcdn.com/imgs/i/2/b/large/ASIAN-Sneakers-Gray-Casual-Shoes-SDL269425810-1-df09d.jpeg","product":"ASIAN SKYPY-31 - Grey Men's Sneakers","rating":"4","orignalPrice":"1,600","disprice":"1,250"},
+    {"img":"https://n4.sdlcdn.com/imgs/i/2/b/large/ASIAN-Sneakers-Gray-Casual-Shoes-SDL353472656-1-cbdd5.jpeg","product":"ASIAN - Gray Men's Sneakers","rating":"4","orignalPrice":"4,150","disprice":"1,135"},
+    {"img":"https://n4.sdlcdn.com/imgs/g/m/3/large/ASIAN-SKYPY-31-Sneakers-Maroon-SDL613487384-1-0859f.jpg","product":"ASIAN Sneakers Maroon Casual Shoes","rating":"4","orignalPrice":450,"disprice":399},
+    {"img":"https://n3.sdlcdn.com/imgs/k/l/d/large/ASIAN-SKYPY-31-Grey-Men-SDL084666475-1-7b9ac.jpg","product":"ASIAN SKYPY-31 - Grey Men's Sneakers","rating":"4","orignalPrice":"1,999","disprice":"1,000"},
+    {"img":"https://n1.sdlcdn.com/imgs/i/2/b/large/ASIAN-Sneakers-Gray-Casual-Shoes-SDL269425810-1-df09d.jpeg","product":"ASIAN SKYPY-31 - Grey Men's Sneakers","rating":"4","orignalPrice":"1,199","disprice":500},
+    {"img":"https://n1.sdlcdn.com/imgs/i/9/z/large/Gliders-By-Liberty-Gray-Casual-SDL095425009-1-67998.jpeg","product":"Gliders By Liberty Gray Casual Shoes","rating":"4","orignalPrice":"2,000","disprice":999}
+    ]
+   },
+   "menCloths":{"heading":"Fashion on Top",
+   "array":[
+    {"img":"https://n2.sdlcdn.com/imgs/k/l/e/large/Dillinger-Grey-100-Cotton-Slim-SDL948024335-1-a5cda.webp","product":"Dillinger - Grey 100% Cotton Slim Fit Men's Casual Shirt ( Pack of 1 )","rating":"4","orignalPrice":"1,200","disprice":800},
+    {"img":"https://n2.sdlcdn.com/imgs/k/k/v/large/UrbanMark-Black-Cotton-Regular-Fit-SDL577646785-1-89e87.webp","product":"","rating":"4","orignalPrice":"1,600","disprice":"1,250"},
+    {"img":"https://n4.sdlcdn.com/imgs/i/2/b/large/ASIAN-Sneakers-Gray-Casual-Shoes-SDL353472656-1-cbdd5.jpeg","product":"ASIAN - Gray Men's Sneakers","rating":"4","orignalPrice":"4,150","disprice":"1,135"},
+    {"img":"https://n4.sdlcdn.com/imgs/g/m/3/large/ASIAN-SKYPY-31-Sneakers-Maroon-SDL613487384-1-0859f.jpg","product":"ASIAN Sneakers Maroon Casual Shoes","rating":"4","orignalPrice":450,"disprice":399},
+    {"img":"https://n1.sdlcdn.com/imgs/k/j/0/large/YHA-Grey-Cotton-Regular-Fit-SDL971791115-1-f7f85.JPG","product":"YHA - Grey Cotton Regular Fit Men's Casual Shirt ( Pack of 1 )","rating":"4","orignalPrice":"1,999","disprice":"1,000"},
+    {"img":"https://n1.sdlcdn.com/imgs/k/j/x/230X258_sharpened/Life-Roads-Black-Cotton-Slim-SDL731320145-1-f891d.webp","product":"Life Roads - Black Cotton Slim Fit Men's Formal Shirt ( Pack of 1 )","rating":"4","orignalPrice":"1,199","disprice":500},
+    {"img":"https://n1.sdlcdn.com/imgs/k/l/j/230X258_sharpened/Dennis-Lingo-Tan-100-Cotton-SDL595535747-1-3ae5a.webp","product":"Dennis Lingo - Tan 100% Cotton Slim Fit Men's Casual Shirt ( Pack of 1 )","rating":"4","orignalPrice":"2,000","disprice":999}
+    ]
+   }
+}
+
+

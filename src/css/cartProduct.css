@@ -1,0 +1,70 @@
+.cp-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+.cp-image img{
+    max-height: 300px;
+}
+.cp-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px 5px 15px 8px;
+}
+.cp-pro-name{
+    font-size: 50px;
+}
+.cp-pro-disc{
+    font-size: 20px;
+    color: gray;
+}
+.cp-price{
+    display: flex;
+    font-size: 30px;
+    align-items: flex-end;
+    gap: 12px;
+}
+.cp-p-orignal{
+    font-size: 20px;
+    color: red;
+}
+.cp-p-discount{
+    font-size: 25px;
+    color: darkgray;
+    border: 1px solid;
+}
+.cp-p-dis-price{
+    font-size: 40px;
+}
+.cp-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: indianred;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    width: 80px;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.cp-btn:hover{
+    background: rgb(203, 64, 64);
+}
+.cp-inc-dec-btm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.cp-inc-dec-btm p{
+    font-size: 20px;
+}
+.cp-cap{
+    background: indianred;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    width: 25px;
+    cursor: pointer;
+}
