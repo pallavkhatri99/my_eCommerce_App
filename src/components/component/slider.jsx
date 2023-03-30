@@ -6,16 +6,15 @@ import '../../css/slider.css';
 
 const ImgSlider = (props) => {
     let images = props.imgs;
-    console.log(images)
     const [currentIndex,setIndexSlide]= useState(0);
     const styleSlide={
         minHeight : '300px',
         width : '100%',
         height : '100%',
-        background : `url(${require(`../../img/banner/${images[currentIndex].replace('./','')}`)})`,
-        backgroundSize: 'cover',
+        background : `url(${require(`../../img/banner/${images[currentIndex].replace('./','')}`)}) left center / cover`,
+        /*backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundRepeat : 'no-repeat'
+        backgroundRepeat : 'no-repeat'*/
     }
 
     const moveSlider = (move) =>{

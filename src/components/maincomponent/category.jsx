@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../css/category.css';
 import List from '../component/list'
 import Paper from '@mui/material/Paper';
@@ -23,6 +24,7 @@ function Category() {
     <>
     <div id="category">
         {img.map(item=>
+            <Link to={`/Product?category=${item.replace(' ','_').replace('.webp','')}`}>
             <div className="cat-item">
             <img src={require(`../../img/cat/${item}`)} alt={item} />
             <h4 
@@ -34,7 +36,8 @@ function Category() {
                 <List />
               </Paper>*/}
             </div>
-        </div>
+            </div>
+            </Link>
             )}
     </div>
     </>

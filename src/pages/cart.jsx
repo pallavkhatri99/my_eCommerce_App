@@ -1,21 +1,29 @@
 import { Button, Paper } from '@mui/material'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import CartProduct from '../components/maincomponent/cartProduct'
 import Footer from '../components/maincomponent/footer'
 import Navbar from '../components/maincomponent/navbar'
 import '../css/cart.css'
 
+
 function Cart() {
+  const cartProduct = useSelector((state)=>state.product.cartProduct)
   return (
     <>
     <Navbar/>
     <div className="cart-box">
         <div className="cart-body">
+            {cartProduct.length!=0 ?
             <div className="cart-item">
-                
-                    <CartProduct/>
-                
+                {cartProduct.map(ele=>
+                    <CartProduct props={ele}/>
+                )}
             </div>
+            : <div className="cart-item">
+              <h1 style={{textAlign:"center"}}>No Product in Cart</h1>
+              </div> 
+            }
             <div className="cart-checkout">
               <Paper>
                 <div className="checkout">
@@ -48,7 +56,7 @@ function Cart() {
             </div>
         </div>
     </div>
-    <div className='footer-tag-bottom'>
+    <div className='footer-tag-bottom' style={{position:(cartProduct.length < 2 ? "absolute":"relative")}}>
       <Footer/>
     </div>
     </>

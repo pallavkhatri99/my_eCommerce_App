@@ -1,0 +1,71 @@
+.login-block, .signup-container{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #848383cf;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 100;      
+}
+.login-container{
+    position: fixed;
+    background: white;
+    width: 500px;
+    height: 430px;
+    border-radius: 15px;
+    z-index: 200;
+}
+.login-box{
+    padding: 5px;
+}
+.login-box,.signup-box h1 {
+    margin: 50px 0px 30px 0px;
+    text-align: center;
+    color: #d32f2f;
+}
+.input-holder{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.log-btn{
+    text-align: center;
+    margin: 50px 0px 10px 0px;
+}
+.menu-log{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 20px 0px 20px;
+    color: dodgerblue;
+}
+.menu-log div:hover{
+    cursor: pointer;
+    text-decoration: underline;    
+}
+.signup-box{
+    position: fixed;
+    background: white;
+    width: 500px;
+    height: 550px;
+    border-radius: 15px;
+}
+.menu-up{
+    text-align: center;
+    margin-top: 25px;
+    color: dodgerblue
+}
+.menu-up:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.close-block{
+    margin: 5px 5px 0px 0px ;
+    float: right;
+    cursor: pointer;
+}
+.close-block:hover{
+    color: #d32f2f;
+}

@@ -1,57 +1,77 @@
-import { Button } from '@mui/material'
+import React, { useState } from 'react'
+import { Button, Rating } from '@mui/material'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import React, { useState } from 'react'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import {calFinPrice,calRating} from '../../common';
 import '../../css/childpro.css'
+import { addToCartProduct, addToMyFAvProduct } from '../../Redux/counterSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-function Product() {
-    const childImg=["https://m.media-amazon.com/images/I/411wOTpPu5L._AC_SY879_.jpg",
-    "https://m.media-amazon.com/images/I/41-WHjYGauL._AC_SY879_.jpg",
-    "https://m.media-amazon.com/images/I/51qFduvrxnL._AC_SY879_.jpg",
-    "https://m.media-amazon.com/images/I/41jgSBZvddL._AC_SY879_.jpg",
-    "https://m.media-amazon.com/images/I/41FDhbJ8jfL._AC_SY879_.jpg",
-    "https://m.media-amazon.com/images/I/51Y6E3An11L._AC_SY879_.jpg"
-    ]
+
+
+function Product(props) {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const product = props.props;
+    const childImg=[product.image]
     const [currImg,setImg]= useState(childImg[0])
-
-    
+    const buyNow = (product) => {
+        dispatch(addToCartProduct(product))
+        navigate('/Cart')
+    }
 
   return (
     <>
         <div className="pro-cover">
             <div className="pro-ip">
                 <div className="pro-img-dx">
-                    <img src={currImg} alt="" />
+                    <img src={product.image} alt="" />
                 </div>
                 <div className="pro-details">
-                    <div className="pro-name">SumgSung As Pro 45 </div>
+                    <div className="pro-name">{product.name}</div>
                     <div className="pro-disc">
                     <div class="disc-list">
+                    {product.category == "Electronic"?
                         <ul>
-                            <li class="disc-item">4 GB RAM | 64 GB ROM | Expandable Upto 256 GB</li>
+                            <li class="disc-item">{product.RAM} RAM | {product.ROM} ROM | Expandable Upto 1 TB</li>
                             <li class="disc-item">17.32 cm (6.82 inch) HD+ Display</li>
                             <li class="disc-item">13Mp + AI Lens | 8MP Front Camera</li>
-                            <li class="disc-item">6000 mAh Li-ion Polymer Battery</li>
+                            <li class="disc-item">{product.battery} Li-ion Polymer Battery</li>
                             <li class="disc-item">MediaTek G37 Processor</li>
                             <li class="disc-item">1 Year on Handset and 6 Months on Accessories</li>
                         </ul>
+                    :""}
                     </div>
                     </div>
-                    <div className="pro-price">RS.12,999</div>
-                    <div className='pro-child-img'>
-                        {childImg.map(ele=><div className='child-img' onMouseEnter={()=>setImg(ele)}><img src={ele} alt="" /></div>)}
+                    <div>
+                        <div className="pro-rating"><Rating name="read-only" value={calRating(product.rating)} readOnly /></div>
+                        <div className="pro-price"><span>RS.{product.price}</span>Rs.{calFinPrice(product.price,product.discount)}</div>
+                        <div className='pro-child-img'>
+                            {childImg.map(ele=><div className='child-img' onMouseEnter={()=>setImg(ele)}><img src={ele} alt="" /></div>)}
+                        </div>
                     </div>
                 </div>
                 
             </div>
             <div className='pro-buttom'>
                 <div className="add-cart">
-                    <Button variant="contained" endIcon={<ShoppingCartCheckoutIcon />} color={'inherit'}>
+                    <Button variant="contained" endIcon={<ShoppingCartCheckoutIcon />} color={'inherit'}
+                        onClick={()=>dispatch(addToCartProduct(product))}>
                         Add to cart
                     </Button>
                 </div>
                 <div className="add-cart">
-                    <Button variant="contained" endIcon={<ShoppingBagIcon />} color={'inherit'}>
+                    <Button variant="contained" endIcon={<FavoriteBorderIcon />} color={'inherit'}
+                        onClick={()=>dispatch(addToMyFAvProduct(product))}>
+                        Add to Favorite
+                    </Button>
+                </div>
+                <div className="add-cart">
+                    <Button variant="contained" endIcon={<ShoppingBagIcon />} color={'inherit'}
+                        onClick={()=>buyNow(product)}>
                         Buy Now
                     </Button>
                 </div>

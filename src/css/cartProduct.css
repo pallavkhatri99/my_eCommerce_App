@@ -5,7 +5,8 @@
     width: 100%;
 }
 .cp-image img{
-    max-height: 300px;
+    max-width: 150px;
+    min-width: 150px;
 }
 .cp-details{
     display: flex;
@@ -15,6 +16,8 @@
 }
 .cp-pro-name{
     font-size: 50px;
+    max-width: 600px;
+    min-width: 600px;
 }
 .cp-pro-disc{
     font-size: 20px;
