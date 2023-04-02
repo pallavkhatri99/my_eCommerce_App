@@ -6,9 +6,10 @@ const initialState = {
   cartProduct:[],
   myFavProduct:[],
   dummyProduct:[],
-  filter:[],
   typeProduct:[],
   discountOnProduct:[],
+  priceMin: 0,
+  priceMax: 0,
 }
 
 
@@ -30,9 +31,12 @@ const products_counterSlice = createSlice({
   reducers: {
     setProduct: (state,actions) => {
       state.products = actions.payload
+      state.dummyProduct = actions.payload
     },
     addToCartProduct: (state,actions) => {
-      state.cartProduct.push(actions.payload)
+      let index  = state.cartProduct.findIndex((ele)=> ele._id == actions.payload._id )
+      if(index==-1)
+        state.cartProduct.push(actions.payload)
     },
     removeFromCartProduct: (state,actions) => {
       let index = state.cartProduct.findIndex(ele=>ele._id == actions.payload._id)
@@ -47,8 +51,10 @@ const products_counterSlice = createSlice({
         state.cartProduct[index].quantity = state.cartProduct[index].quantity == 1 ? 1 : state.cartProduct[index].quantity - 1
 
     },
-    addToMyFAvProduct: (state,action) => {
-      state.myFavProduct.push(action.payload)
+    addToMyFAvProduct: (state,actions) => {
+      let index = state.myFavProduct.findIndex(ele=>ele._id == actions.payload._id)
+      if(index == -1 )
+        state.myFavProduct.push(actions.payload)
     },
     removeFromMyFavProduct: (state,actions) => {
       let index = state.myFavProduct.findIndex(ele=>ele._id == actions.payload._id)
@@ -61,49 +67,54 @@ const products_counterSlice = createSlice({
       else if(actions.payload == 2) //Price: High to Low
       state.products.sort((a,b)=> calFinPrice(b.price,b.discount) - calFinPrice(a.price,a.discount))
     },
-    sortByPriceMinMax: (state,actions) => {
-      let min = actions.payload[0]
-      let max = actions.payload[1]
-      if(state.dummyProduct.length==0)
-        state.dummyProduct = state.products
-      state.products = state.dummyProduct.filter(ele =>  +calFinPrice(ele.price,ele.discount) >= +min && +calFinPrice(ele.price,ele.discount) <= +max )
+    sortByFilter: (state,actions) => { 
+      let outProduct = state.dummyProduct
+      if(actions.payload.sortBy == 'PriceMinMax') {
+        state.priceMin = actions.payload.newValue[0]
+        state.priceMax = actions.payload.newValue[1]
+      }
+      else if(actions.payload.sortBy == 'Type'){
+        if(actions.payload.checked){
+          state.typeProduct.push(actions.payload.name)
+        }
+        else{
+          let index = state.typeProduct.indexOf(actions.payload.name)
+          if(index != -1 ){
+            state.typeProduct.splice(index,1)
+          }
+        }
+      }
+      else if(actions.payload.sortBy == 'Discount'){
+        if(actions.payload.checked){
+          state.discountOnProduct.push(actions.payload.name)
+
+        }
+        else{
+          let index = state.discountOnProduct.indexOf(actions.payload.name)
+          if(index != -1 )
+            state.discountOnProduct.splice(index,1)
+        }
+      }
+      outProduct = state.priceMin!=0 && state.priceMin!=0 ? outProduct.filter(ele =>  +calFinPrice(ele.price,ele.discount) >= +state.priceMin && +calFinPrice(ele.price,ele.discount) <= +state.priceMax ) : outProduct
+      outProduct = state.typeProduct.length!=0 ? outProduct.filter(ele => state.typeProduct.includes(ele.type)) : outProduct
+      outProduct = state.discountOnProduct.length!=0 ? outProduct.filter(ele => state.discountOnProduct.includes(ele.discount)) : outProduct
+      state.products = outProduct;
     },
-    sortByType: (state,actions) => {
-      if(state.dummyProduct.length==0)
-        state.dummyProduct = state.products
-      if(actions.payload.checked){
-        state.typeProduct.push(actions.payload.name)
-        state.products = state.dummyProduct.filter(ele => state.typeProduct.includes(ele.type))
-      }
-      else{
-        let index = state.typeProduct.indexOf(actions.payload.name)
-        if(index != -1 )
-          state.typeProduct.splice(index,1)
-          state.products = state.dummyProduct.filter(ele => !state.typeProduct.includes(ele.type))
-      }
-    },
-    sortByDiscount: (state,actions) => {
-      if(state.dummyProduct.length==0)
-        state.dummyProduct = state.products
-      if(actions.payload.checked){
-        state.typeProduct.push(actions.payload.name)
-        state.products = state.dummyProduct.filter(ele => state.discountOnProduct.includes(ele.discount))
-      }
-      else{
-        let index = state.typeProduct.indexOf(actions.payload.name)
-        if(index != -1 )
-          state.typeProduct.splice(index,1)
-          state.products = state.dummyProduct.filter(ele => !state.discountOnProduct.includes(ele.discount))
-      }
-    },
+    clearFilterAll:(state,actions) => {
+      state.typeProduct = []
+      state.discountOnProduct = []
+      state.priceMin = 0
+      state.priceMax = 0
+      state.products = state.dummyProduct
+    }
   },
 })
 
 
 export const { login, logout } = activeUser_counterSlice.actions
 export const { setProduct, addToCartProduct, addToMyFAvProduct, sortByPrice, 
-  sortByPriceMinMax,sortByType,sortByDiscount, removeFromMyFavProduct, removeFromCartProduct,
-  incDecQuantityPro } = products_counterSlice.actions
+  sortByFilter, removeFromMyFavProduct, removeFromCartProduct,
+  incDecQuantityPro,clearFilterAll } = products_counterSlice.actions
 
 
 

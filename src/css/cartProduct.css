@@ -1,23 +1,106 @@
-.cp-box{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
+@media only screen and (min-width: 700px){
+    .cp-box{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+    .cp-image img{
+        max-width: 150px;
+        min-width: 150px;
+    }
+    .cp-details{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 15px 5px 15px 8px;
+    }
+    .cp-pro-name{
+        font-size: 50px;
+        max-width: 600px;
+        min-width: 600px;
+    }
+    .cp-p-dis-price{
+        font-size: 40px;
+    }
+    .cp-btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: indianred;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        width: 80px;
+        color: white;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .cp-inc-dec-btm{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .cp-inc-dec-btm p{
+        font-size: 20px;
+    }
+    .cp-cap{
+        background: indianred;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        width: 25px;
+        cursor: pointer;
+    }    
 }
-.cp-image img{
-    max-width: 150px;
-    min-width: 150px;
+@media only screen and (max-width: 700px){
+    .cp-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        border: 1px solid crimson;
+        padding: 10px;
+    }
+    .cp-image img{
+        max-width: 100px;
+        min-width: 100px;
+    }
+    .cp-details{
+        display: flex;
+        flex-direction: column;
+    }
+    .cp-pro-name{
+        font-size: 30px;
+    }
+    .cp-p-dis-price{
+        font-size: 40px;
+    }
+    .cp-btn{
+        background: indianred;
+        color: white;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-top: 10px;
+        height: 20px;
+    }
+    .cp-inc-dec-btm{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .cp-inc-dec-btm p{
+        font-size: 20px;
+    }
+    .cp-cap{
+        background: indianred;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        width: 25px;
+        cursor: pointer;
+    }    
 }
-.cp-details{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 15px 5px 15px 8px;
-}
-.cp-pro-name{
-    font-size: 50px;
-    max-width: 600px;
-    min-width: 600px;
+.cp-btn:hover{
+    background: rgb(203, 64, 64);
 }
 .cp-pro-disc{
     font-size: 20px;
@@ -34,40 +117,7 @@
     color: red;
 }
 .cp-p-discount{
-    font-size: 25px;
+    font-size: 15px;
     color: darkgray;
     border: 1px solid;
-}
-.cp-p-dis-price{
-    font-size: 40px;
-}
-.cp-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: indianred;
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
-    width: 80px;
-    color: white;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-.cp-btn:hover{
-    background: rgb(203, 64, 64);
-}
-.cp-inc-dec-btm{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.cp-inc-dec-btm p{
-    font-size: 20px;
-}
-.cp-cap{
-    background: indianred;
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
-    width: 25px;
-    cursor: pointer;
 }

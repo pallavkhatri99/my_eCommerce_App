@@ -1,17 +1,45 @@
-.silder{
-    margin: 20px 20px 0px 20px;
+@media only screen and (min-width: 700px){
+    .silder{
+        margin: 20px 20px 0px 20px;
+    }
+    .slider-previous{
+        position: relative;
+        top: -150px;
+        left: 20px;
+        cursor: pointer;  
+        text-align: left;
+    }
+    .slider-next{
+        position: relative;
+        text-align: right;
+        top : -200px;
+        right: 20px;
+        cursor: pointer;
+    }
+    .slider-image{
+        background-size: 300px 100px;
+    }
 }
-.slider-previous{
-    position: relative;
-    top: -150px;
-    left: 20px;
-    cursor: pointer;  
-    text-align: left;
-}
-.slider-next{
-    position: relative;
-    text-align: right;
-    top : -200px;
-    right: 20px;
-    cursor: pointer;
+@media only screen and (max-width: 700px){
+    .silder{
+        margin: 20px 10px 0px 10px;
+    }
+    .slider-previous{
+        position: relative;
+        top: -70px;
+        left: 0px;
+        cursor: pointer;  
+        text-align: left;
+    }
+    .slider-next{
+        position: relative;
+        text-align: right;
+        top: -110px;
+        right: 0px;
+        cursor: pointer;
+    }
+    .slider-image{
+        background-size: 440px 120px !important;
+        min-height: 120px !important;
+    }
 }

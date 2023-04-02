@@ -7,7 +7,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {calFinPrice,calRating} from '../../common';
 import '../../css/childpro.css'
 import { addToCartProduct, addToMyFAvProduct } from '../../Redux/counterSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -15,9 +15,14 @@ import { useNavigate } from 'react-router-dom';
 function Product(props) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const favProduct = useSelector((state)=>state.product.myFavProduct)
     const product = props.props;
     const childImg=[product.image]
     const [currImg,setImg]= useState(childImg[0])
+    const checkInFac = (id) =>{
+        let index = favProduct.findIndex((ele)=>ele._id == id)
+        return index != -1 ? false : true
+    }
     const buyNow = (product) => {
         dispatch(addToCartProduct(product))
         navigate('/Cart')
@@ -64,7 +69,7 @@ function Product(props) {
                     </Button>
                 </div>
                 <div className="add-cart">
-                    <Button variant="contained" endIcon={<FavoriteBorderIcon />} color={'inherit'}
+                    <Button variant="contained" disabled={!checkInFac(product._id)} endIcon={checkInFac(product._id) ? <FavoriteBorderIcon />: <FavoriteIcon />} color={'inherit'}
                         onClick={()=>dispatch(addToMyFAvProduct(product))}>
                         Add to Favorite
                     </Button>

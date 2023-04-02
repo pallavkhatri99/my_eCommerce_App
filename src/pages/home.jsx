@@ -18,7 +18,9 @@ function Home() {
         <ProductSlider heading={data.shoes.heading} array={data.shoes.array} />
         <ProductSlider heading={data.menCloths.heading} array={data.menCloths.array} />
         <OnTop/>
-        <Footer/>
+        <div style={{position:'relative',bottom:0}}>
+          <Footer/>
+        </div>
     </>
   )
 }

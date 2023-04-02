@@ -22,6 +22,7 @@ function Category() {
     const img = importAll(require.context('../../img/cat/',false, /\.(webp)$/));
   return (
     <>
+    <h3 className='selectCategoty'>&#8595;   Select Categoty   &#8595;</h3>
     <div id="category">
         {img.map(item=>
             <Link to={`/Product?category=${item.replace(' ','_').replace('.webp','')}`}>

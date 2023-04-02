@@ -7,7 +7,7 @@ import Product from '../components/maincomponent/product';
 import { useLocation } from 'react-router-dom';
 import { getAxios } from '../api/useAxios/useAxios'
 import { useDispatch,useSelector } from 'react-redux';
-import { setProduct, sortByPrice, sortByPriceMinMax, sortByType, sortByDiscount } from '../Redux/counterSlice';
+import { setProduct, sortByPrice, sortByFilter, clearFilterAll } from '../Redux/counterSlice';
 
 function Products() {
   const dispatch = useDispatch()
@@ -27,14 +27,18 @@ function Products() {
     getProducts();
   }, [location.search])
   products = useSelector((state)=>state.product.products)
+
   const redColor={ color: red[700],'&.Mui-checked': { color: red[700] } }
-  const [rangeValue, setValue] = useState([200, 1000]);
-  const [priceFilter,setPriceFilter] = useState(0)
+  const [rangeValue, setValue] = useState([1, 30000]);
+  const [priceFilter,setPriceFilter] = useState(0);
+  const [showFilter,setShowHideFilter] = useState(false);
   const typeArray = { Electronic:["Phone","Tablet","Laptop"],
                       Application:["Washing Machine","TV","Air Conditioners","Fan"],
                       Fashion:["Man","Women","Kids"],
                       Home:["Furniture","Kitchen","Bedroom"]
                     }
+  const [typeArrSel,setTypeArrSel] = useState({});
+                    
   const handleChange = (event) => {
     let {id,name,value,checked} = event.target
     if(name == 'priceFilter'){
@@ -43,15 +47,16 @@ function Products() {
     }
     else if(name == 'priceSlider')
       setValue(value);
-    else if(id == 'typeFilter')
-      dispatch(sortByType({name,checked}))
+    else if(id == 'typeFilter'){
+      dispatch(sortByFilter({sortBy:'Type',name,checked}))
+    }
     else if(id == 'discount'){
       console.log(name,checked)
-      dispatch(sortByDiscount({name,checked}))
+      dispatch(sortByFilter({sortBy:'Discount',name,checked}))
     }
   }
   const commitChangesSlider = (event,newValue) => {
-    dispatch(sortByPriceMinMax(newValue))
+    dispatch(sortByFilter({sortBy:'PriceMinMax',newValue}))
   }
   const marks = [
     {
@@ -66,17 +71,22 @@ function Products() {
   const valueLabelFormat = (value) =>{
     return `Rs.${value}`
   }
+  const clearFilter = () => {
+    setPriceFilter(0);setValue([1, 30000]);
+    dispatch(clearFilterAll())
+  }
   
   return (
     <>
     <Navbar/>
      <div className="product">
-        <div className="filter">
+        <div className="showfilter" onClick={()=>setShowHideFilter(!showFilter)}>{showFilter ? "Hide Filter":"Show Filter"}</div>
+        <div className="filter" style={{display:showFilter?'block':'none'}}>
           <Paper elevation={4}>
           <div className="f-filter">
             <div className='f-top-head'>
               <h2>Filter</h2>
-              <span><Button variant="text" sx={redColor}>Clear all</Button></span>
+              <span><Button variant="text" onClick={clearFilter} sx={redColor}>Clear all</Button></span>
             </div>
             <div className="f-order">
               <div className="f-heading">Order By: </div>
@@ -123,7 +133,7 @@ function Products() {
                     <FormControlLabel
                       name={ele}
                       value="end"
-                      control={<Checkbox id='typeFilter' sx={redColor} />}
+                      control={<Checkbox id='typeFilter' name={ele}  sx={redColor} />}
                       label={ele} 
                       labelPlacement="typeFilter"
                       onChange={handleChange}
@@ -134,6 +144,7 @@ function Products() {
             </div>
             <div className="f-discount">
               <div className="f-heading">Discount:</div>
+              {products.length != 0 ? 
               <div className="f-item">
                 <FormControlLabel
                   name='10'
@@ -159,7 +170,7 @@ function Products() {
                   labelPlacement=""
                   onClick={handleChange}
                 />
-              </div>
+              </div>:""}
             </div>
             </div>
           </Paper>
