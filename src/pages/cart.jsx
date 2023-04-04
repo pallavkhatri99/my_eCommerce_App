@@ -73,7 +73,7 @@ function Cart() {
             </div>
         </div>
     </div>
-    <div className='footer-tag-bottom' style={{display:'none' ,position:(cartProduct.length < 2 ? "absolute":"relative")}}>
+    <div className='footer-tag-bottom' style={{position:(cartProduct.length < 2 ? "absolute":"relative")}}>
       <Footer/>
     </div>
     </>
