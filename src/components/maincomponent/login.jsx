@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, TextField } from '@mui/material'
 import '../../css/login.css'
 import { AccountCircle, Construction } from '@mui/icons-material'
@@ -10,11 +10,14 @@ import EmailIcon from '@mui/icons-material/Email';
 import KeyIcon from '@mui/icons-material/Key';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector,useDispatch } from 'react-redux';
-import { logout } from '../../Redux/counterSlice';
+import { addToCartProduct, addToMyFAvProduct, logout,setLogInOut } from '../../Redux/counterSlice';
+import { getAxios, postAxios } from '../../api/useAxios/useAxios';
+import MessageBox from '../component/messageBox';
 
 function Login() {
   const [isloginboxShow,setdisplayLoginBox] = useState(1)
   const [isSignupShow,setdisplaySignupBox] = useState(0)
+  let [msgBox,setMsgBox] = useState('')
   let [userLogin,setUserLogin] = useState({userID:"",userPass:""})
   let [loginError,setLoginError] = useState({userID:false,userPass:false})
   let [userDetails,setUserDetails] = useState({userName:"", userMob:'',userEmail:"",userPass:""})
@@ -37,7 +40,7 @@ function Login() {
     data.userEmail ? error.userEmail= false : error.userEmail= true;
     data.userPass ? error.userPass= false : error.userPass= true;
     setUserError({userName:error.userName, userMob:error.userMob,userEmail:error.userEmail,userPass:error.userPass})
-    if(userError.userName && userError.userMob && userError.userEmail && userError.userPass)
+    if(!error.userName && !error.userMob && !error.userEmail && !error.userPass)
       return true
     else
       return false
@@ -45,7 +48,9 @@ function Login() {
   }
   const createAccount = () =>{
     if(validationCreateAcc(userDetails)){
-      console.log('created')
+      postAxios("/register",userDetails)
+      .then(result=>console.log(result))
+      .catch(err=>console.log(err))
     }
   }
   const validationlogin = (data) =>{
@@ -53,14 +58,51 @@ function Login() {
     data.userID ? error.userID=false : error.userID = true
     data.userPass ? error.userPass=false : error.userPass = true
     setLoginError({userID:error.userID,userPass:error.userPass})
-    if(error.userID && error.userPass)
+    if(!error.userID && !error.userPass)
       return true
     else
      return false
   }
   const login = () =>{
     if(validationlogin(userLogin)){
-      console.log('Login')
+      postAxios("/login",userLogin)
+      .then((result)=>{
+        if(result.data.user==true){
+          localStorage.setItem("userId",result.data[0]._id)
+          localStorage.setItem("userName",result.data[0].userName)
+          dispatch(setLogInOut(true))
+          dispatch(logout())
+          setMsgBox(<MessageBox msg={"Login Successfully"} type={"S"}/>)
+          checkUserActivate()
+        }else if(result.data==false){
+          dispatch(setLogInOut(false))
+          setMsgBox(<MessageBox msg={"Invalide Credential"} type={"E"}/>)
+        }else{
+          dispatch(setLogInOut(false))
+          setMsgBox(<MessageBox msg={result.data} type={"E"}/>)
+        }
+      })
+      .catch(err=>console.log(err))
+    }
+  }
+  useEffect(()=>{
+    let timer = setTimeout(() => setMsgBox('') , 2010);
+        return () => clearTimeout(timer); 
+  },[msgBox])
+  useEffect(()=>{
+    checkUserActivate()
+  },[])
+  const checkUserActivate = () =>{
+    if(localStorage.getItem("userId")){
+      getAxios(`/login/${localStorage.getItem("userId")}`)
+      .then((result) =>{
+        if(result.data.user==true){
+          dispatch(setLogInOut(true))
+          if(result.data[0].userFav.length > 0) result.data[0].userFav.map(ele=>dispatch(addToMyFAvProduct(ele)))
+          if(result.data[0].userCart.length > 0) result.data[0].userCart.map(ele=>dispatch(addToCartProduct(ele)))
+        }
+      })
+      .catch(err => console.log(err))
     }
   }
   return (
@@ -148,6 +190,7 @@ function Login() {
           </div>
         </div>
     </div>:""}
+    {msgBox}
     </>
   )
 }

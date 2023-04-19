@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import {InputBase, IconButton, Button, Badge} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -9,14 +9,30 @@ import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import { Link } from 'react-router-dom';
 import '../../css/navbar.css'
 import { useSelector,useDispatch } from 'react-redux';
-import { login, logout } from '../../Redux/counterSlice';
+import { login, logout, removeFromCartProduct, removeFromMyFavProduct, setLogInOut } from '../../Redux/counterSlice';
+import MessageBox from '../component/messageBox';
 
 
 function Navbar() {
+  let [msgBox,setMsgBox] = useState("")
   const [showmenu,setMenu] = useState(false)
   const dispatch = useDispatch();
   const cartCount = useSelector((state)=>state.product.cartProduct)
   const myFavCount = useSelector((state)=>state.product.myFavProduct)
+  const isUserLogin = useSelector((state) => state.activeUser.isUserLogin)
+  const logOutUser = () =>{
+    dispatch(setLogInOut(false))
+    setMsgBox(<MessageBox msg={"Logout Successfull"} type={"S"}/>)
+    localStorage.clear()
+    if(myFavCount.length>0) myFavCount.map(ele=>dispatch(removeFromMyFavProduct(ele)))
+    if(cartCount.length>0) cartCount.map(ele=>dispatch(removeFromCartProduct(ele)))
+  }
+  useEffect(()=>{
+    let timer = setTimeout(() => {
+      setMsgBox("")
+    }, 2010);
+    return () => clearTimeout(timer)
+  },[isUserLogin])
 
   return (
     <>
@@ -50,7 +66,7 @@ function Navbar() {
       </div>
       <div className='nav-item' style={{display:(showmenu ? 'flex':'none')}}>
         <div className='nav-login'>
-        {0==0 ?
+        {!isUserLogin ?
         <Button 
           key={'md'} 
           size={'md'}
@@ -65,7 +81,7 @@ function Navbar() {
           size={'md'}
           color={'error'}
           startIcon={<Person/>}
-          onClick={() => dispatch(logout())}>
+          onClick={logOutUser}>
             Logout
         </Button>}
         </div>
@@ -95,9 +111,9 @@ function Navbar() {
         </Badge>
         </Link>
         </div>
-        
       </div>
     </div>
+    {msgBox}
     </>
   )
 }

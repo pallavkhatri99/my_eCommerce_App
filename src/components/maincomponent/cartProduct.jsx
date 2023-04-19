@@ -7,6 +7,7 @@ import '../../css/cartProduct.css'
 import { calFinPrice } from '../../common';
 import { removeFromCartProduct,incDecQuantityPro } from '../../Redux/counterSlice';
 import { useDispatch } from 'react-redux';
+import { postAxios } from '../../api/useAxios/useAxios.js'
 
 function CartProduct(props) {
     const dispatch = useDispatch()
@@ -18,6 +19,13 @@ function CartProduct(props) {
         else if(action == '-'){
             dispatch(incDecQuantityPro({id:id,action:'dec'}))
         }
+    }
+    const removeProductFromCart = (product) =>{
+        dispatch(removeFromCartProduct(product))
+        if(localStorage.getItem("userId"))
+            postAxios(`/AddCart/${localStorage.getItem("userId")}/Remove`,product)
+                .then(result => alert(result.data))
+                .catch(err => alert(err))
     }
   return (
     <>
@@ -57,7 +65,7 @@ function CartProduct(props) {
                 </div>
             </div>
         </div>
-        <div className="cp-btn" onClick={()=>dispatch(removeFromCartProduct(product))}>
+        <div className="cp-btn" onClick={()=>removeProductFromCart(product)}>
             <div className="cp-remove">
                 <div className='remoe-btn'>
                     Remove

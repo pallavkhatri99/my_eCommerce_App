@@ -2,13 +2,13 @@ import React from 'react'
 import { Button, Paper, Rating } from '@mui/material'
 import '../../css/productslider.css';
 import TrendingFlatTwoToneIcon from '@mui/icons-material/TrendingFlatTwoTone';
+import { Link } from 'react-router-dom';
 
 
 function ProductSlider(props) {
   console.log(props)
-  const heading = props.heading;
-  const array = props.array
-
+  const { heading, array, link } = props;
+  
   return (
     <div className='wrapper-box'>
     <Paper elevation={3}>
@@ -16,6 +16,7 @@ function ProductSlider(props) {
       <div className="head">
         <h3>{heading}</h3>
         <h6>
+          <Link to={link} >
           <Button 
             key={'md'} 
             size={'md'}
@@ -23,6 +24,7 @@ function ProductSlider(props) {
             endIcon={<TrendingFlatTwoToneIcon />}>
             View all
           </Button>
+          </Link>
         </h6>
       </div>
       <div className="container-wrap">

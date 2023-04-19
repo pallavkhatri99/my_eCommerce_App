@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { calFinPrice } from '../common'
 const initialState = {
   value: 0,
+  isUserLogin : false,
   products:[],
   cartProduct:[],
   myFavProduct:[],
@@ -23,6 +24,9 @@ const activeUser_counterSlice = createSlice({
     logout: (state) => {
       state.value = 0
     },
+    setLogInOut:(state,action) => {
+      state.isUserLogin = action.payload
+    }
   },
 })
 const products_counterSlice = createSlice({
@@ -106,12 +110,12 @@ const products_counterSlice = createSlice({
       state.priceMin = 0
       state.priceMax = 0
       state.products = state.dummyProduct
-    }
+    },
   },
 })
 
 
-export const { login, logout } = activeUser_counterSlice.actions
+export const { login, logout, setLogInOut } = activeUser_counterSlice.actions
 export const { setProduct, addToCartProduct, addToMyFAvProduct, sortByPrice, 
   sortByFilter, removeFromMyFavProduct, removeFromCartProduct,
   incDecQuantityPro,clearFilterAll } = products_counterSlice.actions

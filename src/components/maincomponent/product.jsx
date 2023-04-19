@@ -9,7 +9,7 @@ import '../../css/childpro.css'
 import { addToCartProduct, addToMyFAvProduct } from '../../Redux/counterSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { postAxios } from '../../api/useAxios/useAxios';
 
 
 function Product(props) {
@@ -25,7 +25,25 @@ function Product(props) {
     }
     const buyNow = (product) => {
         dispatch(addToCartProduct(product))
+        if(localStorage.getItem("userId"))
+            postAxios(`/AddCart/${localStorage.getItem("userId")}/Add`,product)
+            .then(result => alert(result.data))
+            .catch(err => alert(err))
         navigate('/Cart')
+    }
+    const addToFavProduct = (product) => {
+        dispatch(addToMyFAvProduct(product))
+        if(localStorage.getItem("userId"))
+            postAxios(`/AddFav/${localStorage.getItem("userId")}/Add`,product)
+            .then(result => alert(result.data))
+            .catch(err => alert(err))
+    }
+    const addProductToCart = (product) =>{
+        dispatch(addToCartProduct(product))
+        if(localStorage.getItem("userId"))
+            postAxios(`/AddCart/${localStorage.getItem("userId")}/Add`,product)
+            .then(result => alert(result.data))
+            .catch(err => alert(err))
     }
 
   return (
@@ -48,7 +66,11 @@ function Product(props) {
                             <li class="disc-item">MediaTek G37 Processor</li>
                             <li class="disc-item">1 Year on Handset and 6 Months on Accessories</li>
                         </ul>
-                    :""}
+                    :product.category=="Application"?
+                        product.type=="Air Conditioners" ?
+                        <ul><li>Power Consumption: 744.39 kWh</li><li >Room Size: 111 to 150 sqft</li><li >1 Year Warranty on Product and 10 Years Warranty on Compressor</li></ul>
+
+                    :"":""}
                     </div>
                     </div>
                     <div>
@@ -64,13 +86,13 @@ function Product(props) {
             <div className='pro-buttom'>
                 <div className="add-cart">
                     <Button variant="contained" endIcon={<ShoppingCartCheckoutIcon />} color={'inherit'}
-                        onClick={()=>dispatch(addToCartProduct(product))}>
+                        onClick={()=>addProductToCart(product)}>
                         Add to cart
                     </Button>
                 </div>
                 <div className="add-cart">
                     <Button variant="contained" disabled={!checkInFac(product._id)} endIcon={checkInFac(product._id) ? <FavoriteBorderIcon />: <FavoriteIcon />} color={'inherit'}
-                        onClick={()=>dispatch(addToMyFAvProduct(product))}>
+                        onClick={()=>addToFavProduct(product)}>
                         Add to Favorite
                     </Button>
                 </div>

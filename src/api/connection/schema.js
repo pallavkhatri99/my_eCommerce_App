@@ -82,15 +82,29 @@ const toyProductSchema = new mongoose.Schema(
     }
 );
 
+const userDetails = new mongoose.Schema({
+    userName:String,
+    mobNumber:Number,
+    userEmail:String,
+    userPass:String,
+    userFav:Array,
+    userCart:Array,
+    userOrder:Array
+})
+
 const ElectroniProduct = mongoose.model('Electronic_Product',electroniProductSchema)
 const ApplicationProduct = mongoose.model('Application_Product',applicatoinProductSchema)
 const FashionProduct = mongoose.model('Fashion_Product',fashionProductSchema)
 const HomeProduct = mongoose.model('Home_Product',homeProductSchema)
 const GroceryProduct = mongoose.model('Grocery_Product',groceryProductSchema)
 const ToyProduct = mongoose.model('Toy_Product',toyProductSchema)
+const UserDetails = mongoose.model('user_Details',userDetails)
 
 
 
 
-module.exports = {ElectroniProduct,ApplicationProduct,FashionProduct,HomeProduct,GroceryProduct,ToyProduct}
+module.exports = {
+    ElectroniProduct,ApplicationProduct,FashionProduct,HomeProduct,
+    GroceryProduct,ToyProduct,UserDetails
+}
 

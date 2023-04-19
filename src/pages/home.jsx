@@ -14,9 +14,9 @@ function Home() {
         <Navbar />
         <Category />
         <Banner />
-        <ProductSlider heading={data.trending.heading} array={data.trending.array} />
-        <ProductSlider heading={data.shoes.heading} array={data.shoes.array} />
-        <ProductSlider heading={data.menCloths.heading} array={data.menCloths.array} />
+        <ProductSlider heading={data.trending.heading} array={data.trending.array} link={'/Product?category=Grocery'} />
+        <ProductSlider heading={data.shoes.heading} array={data.shoes.array}  link={'/Product?category=Fashion'} />
+        <ProductSlider heading={data.menCloths.heading} array={data.menCloths.array}  link={'/Product?category=Fashion'} />
         <OnTop/>
         <div style={{position:'relative',bottom:0}}>
           <Footer/>

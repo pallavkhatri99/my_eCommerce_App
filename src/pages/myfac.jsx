@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { calFinPrice, calRating } from '../common';
 import { useNavigate } from 'react-router-dom';
 import { addToCartProduct, removeFromMyFavProduct } from '../Redux/counterSlice';
+import { postAxios } from '../api/useAxios/useAxios';
 
 
 function MyFav() {
@@ -15,11 +16,17 @@ function MyFav() {
     const dispatch = useDispatch()
     let myFavProducts = useSelector((state)=>state.product.myFavProduct);
     const buyNowFromFav = (product) => {
-        debugger
         navigate('/Cart')
         dispatch(addToCartProduct(product))
     }
-
+    const removeFromMyFav = (ele) =>{
+        console.log(ele)
+        dispatch(removeFromMyFavProduct(ele))
+        if(localStorage.getItem("userId"))
+            postAxios(`/AddFav/${localStorage.getItem("userId")}/Remove`,ele)
+            .then(result => alert(result.data))
+            .catch(err => alert(err))
+    }
   return (
     <>
     <Navbar/>
@@ -30,7 +37,7 @@ function MyFav() {
             {myFavProducts.map(ele=>
             <div className="wrap-pro-fav">
                 <div className='remove-fav'>
-                    <CloseIcon onClick={()=>dispatch(removeFromMyFavProduct(ele))}/>
+                    <CloseIcon onClick={()=>removeFromMyFav(ele)}/>
                 </div>
                 <div className="pro-item">
                     <div className="pro-img">

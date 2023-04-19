@@ -31,7 +31,7 @@
         font-weight: bold;
         background-color: lightgray;
     }*/
-    h3{
+    .selectCategory{
       display: none;  
     }
     
@@ -51,7 +51,7 @@
     .cat-item img{
         width: 75%;
     }
-    h3{
+    .selectCategory{
         margin-top: 5px;
         text-align: center;
       }
