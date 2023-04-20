@@ -20,7 +20,7 @@ function Login() {
   let [msgBox,setMsgBox] = useState('')
   let [userLogin,setUserLogin] = useState({userID:"",userPass:""})
   let [loginError,setLoginError] = useState({userID:false,userPass:false})
-  let [userDetails,setUserDetails] = useState({userName:"", userMob:'',userEmail:"",userPass:""})
+  let [userDetails,setUserDetails] = useState({userName:"", userMob:"",userEmail:"",userPass:""})
   let [userError,setUserError] = useState({userName:false, userMob:false,userEmail:false,userPass:false})
   const dispatch = useDispatch();
   const isShowLogin =  useSelector((state)=> state.activeUser.value);
@@ -49,7 +49,16 @@ function Login() {
   const createAccount = () =>{
     if(validationCreateAcc(userDetails)){
       postAxios("/register",userDetails)
-      .then(result=>console.log(result))
+      .then((result)=>{
+        if(result.data.includes("Sucesssfully")){
+          setMsgBox(<MessageBox msg={result.data} type={"S"}/>)
+          setUserDetails({userName:"", userMob:"",userEmail:"",userPass:""})
+          setdisplayLoginBox(1);
+          setdisplaySignupBox(0);
+        }else{
+          setMsgBox(<MessageBox msg={result.data} type={"E"}/>)
+        }
+      })
       .catch(err=>console.log(err))
     }
   }
@@ -152,27 +161,27 @@ function Login() {
               <Box sx={{ display: 'flex',justifyContent: 'center', alignItems: 'center',width: '100%' }}>
                     <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                     <TextField 
-                      error={userError.userName} onChange={handleChanges} 
+                      error={userError.userName} onChange={handleChanges} value={userDetails.userName}
                       sx={{width: '70%'}} 
                       id="userName" label="Enter your Name" variant="standard" />
               </Box>
               <Box sx={{ display: 'flex',justifyContent: 'center', alignItems: 'center',width: '100%' }}>
                     <CallIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                     <TextField 
-                      error={userError.userMob} onChange={handleChanges} 
+                      error={userError.userMob} onChange={handleChanges} value={userDetails.userMob}
                       sx={{width: '70%'}} helperText={userDetails.userMob.length > 10 ? "Only 10 Digit Allow":""}
                       id="userMob" label="Enter your Mobile No." variant="standard" />
               </Box>
               <Box sx={{ display: 'flex',justifyContent: 'center', alignItems: 'center',width: '100%' }}>
                     <EmailIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                     <TextField 
-                      error={userError.userEmail} onChange={handleChanges} 
+                      error={userError.userEmail} onChange={handleChanges} value={userDetails.userEmail}
                       sx={{width: '70%'}}  id="userEmail" label="Enter your Email" variant="standard" />
               </Box>
               <Box sx={{ display: 'flex',justifyContent: 'center', alignItems: 'center',width: '100%' }}>
                     <KeyIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                     <TextField 
-                      error={userError.userPass} onChange={handleChanges} 
+                      error={userError.userPass} onChange={handleChanges} value={userDetails.userPass}
                       sx={{width: '70%'}} type={isShowHidePass ? 'text':'password'}  id="userPass" label="Enter your Password" variant="standard" />
                       {isShowHidePass ?
                       <VisibilityOutlinedIcon sx={{ color: 'action.active', mx: -1.5, cursor:'pointer' }} onClick={() => setShowHidePass(false)}/> :
