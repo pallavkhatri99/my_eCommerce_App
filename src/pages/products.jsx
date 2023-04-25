@@ -125,10 +125,10 @@ function Products() {
               </div>
             </div>
             <div className="f-brand">
-              <div className="f-heading">{products.length != 0 ? products[0].category != 'Grocery' && products[0].category != 'Toy' ? 'Type:':'':''}</div>
+              <div className="f-heading">{products.length != 0 ? products[0].category != 'Grocery' && products[0].category != 'Toys' ? 'Type:':'':''}</div>
               <div className="f-item">
                 {products.length != 0 ? 
-                  products[0].category != 'Grocery' && products[0].category != 'Toy' ?
+                  products[0].category != 'Grocery' && products[0].category != 'Toys' ?
                   typeArray[products[0].category].map((ele)=>
                     <FormControlLabel
                       name={ele}

@@ -53,10 +53,10 @@ app.get("/product",(req,res)=>{
         })
         .catch((err)=>console.log(err))
     }
-    if(query.category=="Toy"){
+    if(query.category=="Toys"){
         ToyProduct.find()
         .then((result)=>{
-        res.send(result)
+            res.send(result)
         })
         .catch((err)=>console.log(err))
     }
