@@ -24,6 +24,7 @@ function Login() {
   let [userError,setUserError] = useState({userName:false, userMob:false,userEmail:false,userPass:false})
   const dispatch = useDispatch();
   const isShowLogin =  useSelector((state)=> state.activeUser.value);
+  const locallyTestLogin = useSelector((state)=>state.activeUser.server == 'local' ? true:false);
   const [isShowHidePass,setShowHidePass] = useState(false)
   const handleChangeLogin = (e) => {
     const {value,id} = e.target
@@ -114,6 +115,11 @@ function Login() {
       .catch(err => console.log(err))
     }
   }
+  const testLogin = () =>{
+    setMsgBox(<MessageBox msg={"Login Successfully"} type={"S"}/>)
+    dispatch(setLogInOut(true))
+    dispatch(logout())
+  }
   return (
     <>
     {isShowLogin==1 ? 
@@ -143,8 +149,8 @@ function Login() {
               </div>
             </div>
             <div className="log-btn">
-              <Button onClick={login} sx={{width:'50%'}} variant="contained" color="secondary" fullWidth>
-              LOGIN
+              <Button onClick={locallyTestLogin ? testLogin:login} sx={{width:'50%'}} variant="contained" color="secondary" fullWidth>
+              {locallyTestLogin?'Test ':""} LOGIN
               </Button>
             </div>
           </div>

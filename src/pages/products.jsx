@@ -8,11 +8,21 @@ import { useLocation } from 'react-router-dom';
 import { getAxios } from '../api/useAxios/useAxios'
 import { useDispatch,useSelector } from 'react-redux';
 import { setProduct, sortByPrice, sortByFilter, clearFilterAll } from '../Redux/counterSlice';
+import queryString from 'query-string';
 
 function Products() {
   const dispatch = useDispatch()
   const location = useLocation()
   let products = useSelector((state)=>state.product.products)
+  const callBy = useSelector((state)=>state.product.server == 'local' ? true:false)
+  const getProductLocally = () =>{
+    const data = import('../dataFile/dataProducts.json');
+          data.then((e)=>{
+            const parased = queryString.parse(location.search)
+            dispatch(setProduct(e[parased.category]));
+          })
+          .catch((err)=> console.log(err))
+  }
   const getProducts = async () => {
     dispatch(setProduct([]));
     let result =  await getAxios(`/product${location.search}`)
@@ -24,7 +34,7 @@ function Products() {
       dispatch(setProduct(result));
   }
   useEffect(()=>{
-    getProducts();
+    callBy ? getProductLocally() : getProducts();
   }, [location.search])
   products = useSelector((state)=>state.product.products)
 

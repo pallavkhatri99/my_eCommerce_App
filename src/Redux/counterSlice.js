@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { calFinPrice } from '../common'
 const initialState = {
+  server:'local',
   value: 0,
   isUserLogin : false,
   products:[],
@@ -51,8 +52,10 @@ const products_counterSlice = createSlice({
       let index = state.cartProduct.findIndex(ele=>ele._id == actions.payload.id)
       if(actions.payload.action == 'inc')
         state.cartProduct[index].quantity = state.cartProduct[index].quantity == undefined ? 2 : state.cartProduct[index].quantity + 1
-      else
-        state.cartProduct[index].quantity = state.cartProduct[index].quantity == 1 ? 1 : state.cartProduct[index].quantity - 1
+      else{
+        if(state.cartProduct[index].quantity != 1 && state.cartProduct[index].quantity != undefined)
+          state.cartProduct[index].quantity = state.cartProduct[index].quantity == 1 ? 1 : state.cartProduct[index].quantity - 1
+      }
 
     },
     addToMyFAvProduct: (state,actions) => {
