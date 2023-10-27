@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 
 function ProductSlider(props) {
-  console.log(props)
   const { heading, array, link } = props;
   
   return (

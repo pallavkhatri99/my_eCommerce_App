@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CartProduct from '../components/maincomponent/cartProduct'
 import Footer from '../components/maincomponent/footer'
-import Navbar from '../components/maincomponent/navbar'
 import '../css/cart.css'
 import { calFinPrice, calDiscountPrice } from '../common'
-
+import { removeFromCartProduct, myOrders } from '../Redux/counterSlice'
 
 function Cart() {
+  const dispatch = useDispatch();
   const [priceDetalis,setPriceDetails] = useState({price:0,disPrice:0,totalPrice:0})
   const cartProduct = useSelector((state)=>state.product.cartProduct)
   const calAllPriceFor = (cartProduct) => {
@@ -17,18 +17,21 @@ function Cart() {
       let totalPrice = cartProduct.reduce((acc, currValue) =>{return  acc + calFinPrice(currValue.price,currValue.discount) * (currValue.quantity==undefined ? 1 : +currValue.quantity) },0)
       let disPrice = cartProduct.reduce((acc, currValue) =>{return  acc + calDiscountPrice(currValue.price,currValue.discount) * (currValue.quantity==undefined ? 1 : +currValue.quantity)},0)
       setPriceDetails({price,disPrice:parseInt(disPrice),totalPrice:parseInt(totalPrice)})
-      console.log({price,disPrice:parseInt(disPrice),totalPrice:parseInt(totalPrice)})
     }
     else
       setPriceDetails({price:0,disPrice:0,totalPrice:0})
-
   }
+  function placeMyOrder(){
+    cartProduct.map(product => dispatch(myOrders({product})));
+    cartProduct.map(product => dispatch(removeFromCartProduct(product)));
+    
+  }
+  
   useEffect(()=>{
     calAllPriceFor(cartProduct)
   },[cartProduct])
   return (
     <>
-    <Navbar/>
     <div className="cart-box">
         <div className="cart-body">
             {cartProduct.length!=0 ?
@@ -64,7 +67,11 @@ function Cart() {
                     </div>
                   <div className="cal-divider"></div>
                     <div className="cal-checkout-btn">
-                    <Button variant="contained" disabled={priceDetalis.price!=0 && priceDetalis.disPrice!=0 && priceDetalis.totalPrice!=0 ? false : true} color="secondary" fullWidth>
+                    <Button variant="contained" 
+                            disabled={priceDetalis.price!=0 && priceDetalis.totalPrice!=0 ? false : true} 
+                            color="secondary" 
+                            fullWidth
+                            onClick={placeMyOrder}>
                       PLACE ORDER
                     </Button>
                     </div>
@@ -73,7 +80,7 @@ function Cart() {
             </div>
         </div>
     </div>
-    <div className='footer-tag-bottom' style={{position:(cartProduct.length < 2 ? "absolute":"relative")}}>
+    <div className='footer-tag-bottom' style={{position:(cartProduct.length < 2 ? "absolute":"relative"),bottom:"-10px"}}>
       <Footer/>
     </div>
     </>

@@ -15,6 +15,7 @@ import { getAxios, postAxios } from '../../api/useAxios/useAxios';
 import MessageBox from '../component/messageBox';
 
 function Login() {
+  const dispatch = useDispatch();
   const [isloginboxShow,setdisplayLoginBox] = useState(1)
   const [isSignupShow,setdisplaySignupBox] = useState(0)
   let [msgBox,setMsgBox] = useState('')
@@ -22,7 +23,6 @@ function Login() {
   let [loginError,setLoginError] = useState({userID:false,userPass:false})
   let [userDetails,setUserDetails] = useState({userName:"", userMob:"",userEmail:"",userPass:""})
   let [userError,setUserError] = useState({userName:false, userMob:false,userEmail:false,userPass:false})
-  const dispatch = useDispatch();
   const isShowLogin =  useSelector((state)=> state.activeUser.value);
   const locallyTestLogin = useSelector((state)=>state.activeUser.server == 'local' ? true:false);
   const [isShowHidePass,setShowHidePass] = useState(false)

@@ -122,6 +122,10 @@
     .h-pro-price .discounted{
         font-size: 24px;
     }
+    .footer-top{
+        position: relative !important;
+        bottom: 0 !important;
+    }
 }
 .container h1{
     text-align: center;

@@ -33,6 +33,7 @@ function Product(props) {
     }
     const addToFavProduct = (product) => {
         dispatch(addToMyFAvProduct(product))
+        props.hablePopUpBar('Product added to Favorite');
         if(localStorage.getItem("userId"))
             postAxios(`/AddFav/${localStorage.getItem("userId")}/Add`,product)
             .then(result => alert(result.data))
@@ -40,6 +41,7 @@ function Product(props) {
     }
     const addProductToCart = (product) =>{
         dispatch(addToCartProduct(product))
+        props.hablePopUpBar('Product added to cart');
         if(localStorage.getItem("userId"))
             postAxios(`/AddCart/${localStorage.getItem("userId")}/Add`,product)
             .then(result => alert(result.data))

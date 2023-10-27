@@ -7,7 +7,7 @@ function MessageBox(props) {
         setDisplay(true)
         let timer = setTimeout(() => setDisplay(false) , 2000);
         return () => clearTimeout(timer);
-    },[])
+    },[props])
   return (
     <>
     {isDisplay ?

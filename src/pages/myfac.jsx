@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Rating } from '@mui/material'
-import Navbar from '../components/maincomponent/navbar'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import CloseIcon from '@mui/icons-material/Close';
 import '../css/myfav.css'
@@ -9,6 +8,7 @@ import { calFinPrice, calRating } from '../common';
 import { useNavigate } from 'react-router-dom';
 import { addToCartProduct, removeFromMyFavProduct } from '../Redux/counterSlice';
 import { postAxios } from '../api/useAxios/useAxios';
+import Footer from '../components/maincomponent/footer';
 
 
 function MyFav() {
@@ -29,7 +29,6 @@ function MyFav() {
     }
   return (
     <>
-    <Navbar/>
     { myFavProducts.length != 0 ?
     <div className="container">
         <h1>List of My Favourite Products</h1>
@@ -68,6 +67,9 @@ function MyFav() {
     <h1>List of My Favourite Products</h1>
     <h2 style={{textAlign: 'center',marginTop:'100px',fontSize: '70px'}}>No Product in My Favourite</h2>
     </div>}
+    <div className='footer-top' style={{position:(myFavProducts.length < 6 ? "absolute":"relative"),bottom:"-10px"}}>
+        <Footer />
+    </div>
     </>
   )
 }

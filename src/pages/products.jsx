@@ -1,14 +1,18 @@
+import React ,{ useState ,useEffect, lazy }from 'react';
 import {  Box, Button, Checkbox, FormControlLabel, Paper, Radio, RadioGroup, Slider } from '@mui/material';
-import React ,{ useState ,useEffect }from 'react';
 import { red } from '@mui/material/colors';
-import Navbar from '../components/maincomponent/navbar'
-import '../css/product.css';
 import Product from '../components/maincomponent/product';
+import '../css/product.css';
+import Footer from '../components/maincomponent/footer';
 import { useLocation } from 'react-router-dom';
 import { getAxios } from '../api/useAxios/useAxios'
 import { useDispatch,useSelector } from 'react-redux';
 import { setProduct, sortByPrice, sortByFilter, clearFilterAll } from '../Redux/counterSlice';
 import queryString from 'query-string';
+import PopUpBar from '../components/component/popUpBar';
+import Loader from '../components/component/loader';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 
 function Products() {
   const dispatch = useDispatch()
@@ -48,6 +52,13 @@ function Products() {
                       Home:["Furniture","Kitchen","Bedroom"]
                     }
   const [typeArrSel,setTypeArrSel] = useState({});
+  //handle PopUpBar here
+  const [msg,setMsg] = useState('');
+  const [action,setAction] = useState(false);
+  const hablePopUpBar = (msg) =>{
+    setMsg(msg);
+    setAction(true);
+  }
                     
   const handleChange = (event) => {
     let {id,name,value,checked} = event.target
@@ -88,9 +99,12 @@ function Products() {
   
   return (
     <>
-    <Navbar/>
      <div className="product">
-        <div className="showfilter" onClick={()=>setShowHideFilter(!showFilter)}>{showFilter ? "Hide Filter":"Show Filter"}</div>
+        <div className="showfilter" onClick={()=>setShowHideFilter(!showFilter)}>
+          {showFilter ? 
+            <Button endIcon={<FilterAltOffIcon />}>Filter</Button>: <Button endIcon={<FilterAltIcon />}>Filter</Button>
+          }
+        </div>
         <div className="filter" style={{display:showFilter?'block':'none'}}>
           <Paper elevation={4}>
           <div className="f-filter">
@@ -190,12 +204,16 @@ function Products() {
             <Paper>
               <div className="product-container">
                 {products.length != 0 ? 
-                products.map((ele)=><Product props={ele}/>) : 
-                <h1>Loading.....</h1>}
+                products.map((ele)=><Product props={ele} hablePopUpBar={hablePopUpBar}/>) : 
+                <div style={{margin:'200px'}}><Loader/></div>}
               </div>
             </Paper>
           </div>
         </div>
+     </div>
+     <PopUpBar msg={msg} action={action} />
+     <div style={{paddingTop:"10px"}}>
+      <Footer />
      </div>
     </>
   )

@@ -12,6 +12,8 @@ const initialState = {
   discountOnProduct:[],
   priceMin: 0,
   priceMax: 0,
+  myOrders:[],
+  logout : false,
 }
 
 
@@ -27,7 +29,10 @@ const activeUser_counterSlice = createSlice({
     },
     setLogInOut:(state,action) => {
       state.isUserLogin = action.payload
-    }
+    },
+    setLogout : (state,action) =>{
+        state.logout = action.payload
+    },
   },
 })
 const products_counterSlice = createSlice({
@@ -114,14 +119,17 @@ const products_counterSlice = createSlice({
       state.priceMax = 0
       state.products = state.dummyProduct
     },
+    myOrders:(state, action) => {
+      state.myOrders.push(action.payload.product);
+    }
   },
 })
 
 
-export const { login, logout, setLogInOut } = activeUser_counterSlice.actions
+export const { login, logout, setLogInOut, setLogout } = activeUser_counterSlice.actions
 export const { setProduct, addToCartProduct, addToMyFAvProduct, sortByPrice, 
   sortByFilter, removeFromMyFavProduct, removeFromCartProduct,
-  incDecQuantityPro,clearFilterAll } = products_counterSlice.actions
+  incDecQuantityPro,clearFilterAll,myOrders } = products_counterSlice.actions
 
 
 

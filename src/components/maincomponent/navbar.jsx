@@ -5,13 +5,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import {Favorite,Person} from '@mui/icons-material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
-import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
+import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 import '../../css/navbar.css'
 import { useSelector,useDispatch } from 'react-redux';
 import { login, logout, removeFromCartProduct, removeFromMyFavProduct, setLogInOut } from '../../Redux/counterSlice';
 import MessageBox from '../component/messageBox';
-
+import logo from '../../img/iconbestDeal.jpg'
+import SplitButton from '../component/Splitbutton';
 
 function Navbar() {
   let [msgBox,setMsgBox] = useState("")
@@ -38,11 +39,12 @@ function Navbar() {
     <>
     <div id="nav">
       <div className='menuIcon'>{showmenu ? 
-        <CloseFullscreenIcon sx={{fontSize:'50px'}} onClick={()=>setMenu(false)} /> : 
-        <MenuIcon sx={{fontSize:'50px'}} onClick={()=>setMenu(true)} />}
+        <CloseIcon sx={{fontSize:'38px',backgroundColor:'#7c75753b',marginRight:'-10px'}} onClick={()=>setMenu(false)} /> : 
+        <MenuIcon sx={{fontSize:'38px',backgroundColor:'#7c75753b',marginRight:'-10px'}} onClick={()=>setMenu(true)} />}
       </div>
-      <div className='nav-logo'>
-        <Link to="/Home"><h1>best<span>Deal</span><a>.com</a></h1></Link>
+      <div className='nav-logo' style={{display:'flex'}}>
+        <div><img src={logo} style={{width:'30px'}}/></div>
+        <div><Link to="/Home"><h1>best<span>Deal</span><a>.com</a></h1></Link></div>
       </div>
       <div className='nav-search'>
        <Paper elevation={3} className='search-bar' >
@@ -76,14 +78,15 @@ function Navbar() {
             Login
         </Button>
         :
-        <Button 
+        <SplitButton />
+        /*<Button 
           key={'md'} 
           size={'md'}
           color={'error'}
           startIcon={<Person/>}
           onClick={logOutUser}>
             Logout
-        </Button>}
+        </Button>*/}
         </div>
         <div className='nav-fav'>
         <Link to='/MyFav'>
